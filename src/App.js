@@ -25,14 +25,14 @@ const App = () => {
         const data = await response.json();
         // getting the movies only with data.Search
         setMovies(data.Search); 
-        if (movies.length == 0) {
+        if (movies.length === 0) {
             setMessage('no movies found')
         }
     }
 
-    // useEffect(() => {
-    //     searchMovies('')
-    // }, []);
+    useEffect(() => {
+        searchMovies('anaconda')
+    }, []);
 
     return (
         <div className="app">
