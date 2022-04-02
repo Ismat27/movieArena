@@ -7,32 +7,35 @@ import SearchIcon from "./search.svg";
 // 4e5416e9
 
 const API_URL = 'http://www.omdbapi.com/?apikey=4e5416e9';
-const movie1 = {
-    "Title": "Underworld: Evolution",
-    "Year": "2006",
-    "imdbID": "tt0401855",
-    "Type": "movie",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BMjEzNDY1OTQwOV5BMl5BanBnXkFtZTcwNjcxMTIzMw@@._V1_SX300.jpg"
-}
-
 const App = () => {
     const [movies, setMovies] = useState([]);
     const [searchTerm, setSearchTerm] = useState("")
     const [message, setMessage] = useState("Search Movies")
 
-    const searchMovies = async (title) => {
-        const response = await fetch(`${API_URL}&s=${title}`);
-        const data = await response.json();
-        // getting the movies only with data.Search
-        setMovies(data.Search); 
+    // const searchMovies = async (title) => {
+    //     const response = await fetch(`${API_URL}&s=${title}`);
+    //     const data = await response.json();
+    //     // getting the movies only with data.Search
+    //     setMovies(data.Search); 
+    //     if (movies.length === 0) {
+    //         setMessage('no movies found')
+    //     }
+    // }
+
+    const searchMovies = (title) => {
+        fetch(`${API_URL}&s=${title}`)
+        .then(data => data.json())
+        .then(data => {
+            setMovies(data.Search)
+        })
         if (movies.length === 0) {
-            setMessage('no movies found')
+            setMessage('no movie found')
         }
     }
 
-    useEffect(() => {
-        searchMovies('anaconda')
-    }, []);
+    // useEffect(() => {
+    //     searchMovies('anaconda')
+    // }, []);
 
     return (
         <div className="app">
